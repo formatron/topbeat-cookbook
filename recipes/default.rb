@@ -5,7 +5,7 @@ procs = node['formatron_topbeat']['procs']
 stats_system = node['formatron_topbeat']['stats_system']
 stats_proc = node['formatron_topbeat']['stats_proc']
 stats_filesystem = node['formatron_topbeat']['stats_filesystem']
-hostname = node['formatron_topbeat']['logstash']['hostname']
+host = node['formatron_topbeat']['logstash']['host']
 port = node['formatron_topbeat']['logstash']['port']
 
 include_recipe 'formatron_beats::default'
@@ -16,7 +16,7 @@ end
 
 template '/etc/topbeat/topbeat.yml' do
   variables(
-    hostname: hostname,
+    host: host,
     port: port,
     interval: interval,
     procs: procs,
