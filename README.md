@@ -1,3 +1,3 @@
-# filebeat-cookbook
+# topbeat-cookbook
 
-Formatron Filebeat cookbook
+Formatron Topbeat cookbook
