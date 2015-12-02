@@ -1,5 +1,5 @@
-default['formatron_topbeat']['version'] = '1.0.0'
-default['formatron_topbeat']['checksum'] = '22b1d40fafbe9d9964f95677628727073ba1114803c5a03a7f1a1c8d74e26c5c'
+default['formatron_topbeat']['version'] = nil
+
 default['formatron_topbeat']['interval'] = 10
 default['formatron_topbeat']['procs'] = ['.*']
 default['formatron_topbeat']['stats_system'] = true

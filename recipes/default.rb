@@ -1,5 +1,5 @@
 version = node['formatron_topbeat']['version']
-checksum = node['formatron_topbeat']['checksum']
+
 interval = node['formatron_topbeat']['interval']
 procs = node['formatron_topbeat']['procs']
 stats_system = node['formatron_topbeat']['stats_system']
@@ -8,20 +8,10 @@ stats_filesystem = node['formatron_topbeat']['stats_filesystem']
 hostname = node['formatron_topbeat']['logstash']['hostname']
 port = node['formatron_topbeat']['logstash']['port']
 
-cache = Chef::Config[:file_cache_path]
-deb = File.join cache, 'filebeat.deb' 
-deb_url = "https://download.elastic.co/beats/topbeat/topbeat_#{version}_amd64.deb"
+include_recipe 'formatron_beats::default'
 
-remote_file deb do
-  source deb_url
-  checksum checksum
-  notifies :install, 'dpkg_package[topbeat]', :immediately
-end
-
-dpkg_package 'topbeat' do
-  source deb
-  action :nothing
-  notifies :restart, 'service[topbeat]', :delayed
+package 'topbeat' do
+  version version
 end
 
 template '/etc/topbeat/topbeat.yml' do
