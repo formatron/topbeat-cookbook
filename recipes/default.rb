@@ -1,5 +1,7 @@
 version = node['formatron_topbeat']['version']
 
+enabled = node['formatron_topbeat']['enabled']
+
 interval = node['formatron_topbeat']['interval']
 procs = node['formatron_topbeat']['procs']
 stats_system = node['formatron_topbeat']['stats_system']
@@ -25,10 +27,11 @@ template '/etc/topbeat/topbeat.yml' do
     stats_proc: stats_proc,
     stats_filesystem: stats_filesystem
   )
-  notifies :restart, 'service[topbeat]', :delayed
+  notifies :restart, 'service[topbeat]', :delayed if enabled
 end
 
 service 'topbeat' do
   supports status: true, restart: true, reload: false
-  action [ :enable, :start ]
+  action [ :enable, :start ] if enabled
+  action [ :disable, :stop ] unless enabled
 end
